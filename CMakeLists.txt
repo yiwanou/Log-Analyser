@@ -10,4 +10,6 @@ add_executable(log_analyser
         Lecture.h
         main.cpp
         Infos.cpp
-        Infos.h)
+        Infos.h
+        Statistic.cpp
+        Statistic.h)

@@ -8,19 +8,18 @@
 #include <fstream>
 #include <string>
 #include <sstream>
-using namespace std;
 
-const char config[] = "http://intranet-if.insa-lyon.fr/temps/\n"
-                      "file=main.exe\n";
+
+const char *const config = "http://intranet-if.insa-lyon.fr";
 
 class Lecture {
 private:
-    string filename;
-    ifstream fin;
+    std::string filename;
+    std::ifstream fin;
 public:
-    Lecture(string fname);
+    Lecture(std::string fname);
     void readFile();
-    static  void stockerInfos(const string &line);
+    static  void stockerInfos(const std::string &line);
 };
 
 

@@ -3,7 +3,7 @@
 //
 
 #include "Lecture.h"
-
+using namespace std;
 Lecture::Lecture(string fname):filename(fname){};
 
 void Lecture:: readFile() {
@@ -51,6 +51,11 @@ void Lecture::stockerInfos(const string &line){
     /*getline(iss, userAgent, '"');
     getline(iss, userAgent, '"');*/
 
+    // erase the config
+    size_t position = referrer.find(config);
+    if (position != string::npos) {
+        referrer.erase(0, strlen(config));
+    }
     //print les infos
 
     cout<<ipAddress<<endl;
@@ -59,4 +64,10 @@ void Lecture::stockerInfos(const string &line){
     cout<<httpRequest<<endl;
     cout<<userAgent<<endl;
     cout<<"-----------------------------------"<<endl;
+
+    /*
+     * set the attributes of class infos
+     * setIP(ipAddress);
+     *
+     */
 }

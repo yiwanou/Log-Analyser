@@ -4,9 +4,14 @@
 
 #ifndef LOG_ANALYSER_INFOS_H
 #define LOG_ANALYSER_INFOS_H
-
+#include <iostream>
 
 class Infos {
+public:
+    friend class Lecture;
+    void setIP(std::string IP);
+
+private:
 
 };
 
