@@ -1,0 +1,4 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/ninja -DCMAKE_C_COMPILER=/opt/homebrew/opt/llvm/bin/clang -DCMAKE_CXX_COMPILER=/opt/homebrew/opt/llvm/bin/clang++ -G Ninja -S "/Users/qinshudai/Desktop/INSA/IF/3A/dev logiciel/log analyser" -B "/Users/qinshudai/Desktop/INSA/IF/3A/dev logiciel/log analyser/cmake-build-debug"
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/qinshudai/Desktop/INSA/IF/3A/dev logiciel/log analyser/cmake-build-debug
