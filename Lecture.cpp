@@ -3,15 +3,18 @@
 //
 
 #include "Lecture.h"
-using namespace std;
-Lecture::Lecture(string fname):filename(fname){};
+#include "Infos.h"
 
-void Lecture:: readFile() {
+using namespace std;
+
+Lecture::Lecture(string fname) : filename(fname) {};
+
+void Lecture::readFile() {
     fin.open(filename);
     if (!fin.is_open()) {
-            cerr << "Failed to open fin: " << filename << endl;
-            exit(1);
-        }
+        cerr << "Failed to open fin: " << filename << endl;
+        exit(1);
+    }
 
     string line;
     while (getline(fin, line)) {
@@ -19,10 +22,11 @@ void Lecture:: readFile() {
     }
 
 }
-void Lecture::stockerInfos(const string &line){
+
+void Lecture::stockerInfos(const string &line) {
     istringstream iss(line);
-    string ipAddress,dateTime,referrer,httpRequest,userAgent;
-    int statusCode,dataSize;
+    string ipAddress, dateTime, referrer, httpRequest, userAgent;
+    int statusCode, dataSize;
 
     getline(iss, ipAddress, ' ');
     iss.ignore(256, ' ');
@@ -36,7 +40,7 @@ void Lecture::stockerInfos(const string &line){
     getline(iss, httpRequest, '"');
     getline(iss, httpRequest, '"');*/
 
-    iss>>__quoted(httpRequest);
+    iss >> __quoted(httpRequest);
 
     iss >> statusCode >> dataSize;
 
@@ -45,8 +49,8 @@ void Lecture::stockerInfos(const string &line){
     getline(iss, referrer, '"');
     getline(iss, referrer, '"');*/
 
-    iss>>__quoted(referrer);
-    iss>>__quoted(userAgent);
+    iss >> __quoted(referrer);
+    iss >> __quoted(userAgent);
 
     /*getline(iss, userAgent, '"');
     getline(iss, userAgent, '"');*/
@@ -57,17 +61,14 @@ void Lecture::stockerInfos(const string &line){
         referrer.erase(0, strlen(config));
     }
     //print les infos
-
-    cout<<ipAddress<<endl;
-    cout<<dateTime<<endl;
-    cout<<referrer<<endl;
-    cout<<httpRequest<<endl;
-    cout<<userAgent<<endl;
-    cout<<"-----------------------------------"<<endl;
-
     /*
-     * set the attributes of class infos
-     * setIP(ipAddress);
-     *
-     */
+    cout << ipAddress << endl;
+    cout << dateTime << endl;
+    cout << referrer << endl;
+    cout << httpRequest << endl;
+    cout << userAgent << endl;
+    cout << "-----------------------------------" << endl;*/
+
+    Infos log(ipAddress, dateTime, referrer, httpRequest, userAgent, statusCode, dataSize);
+    cout<<log;
 }
