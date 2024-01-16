@@ -10,19 +10,28 @@
 
 class Infos {
 public:
-    Infos(std::string &ipAddress, std::string &dateTime, std::string &referrer, std::string &httpRequest,
+    Infos(std::string &ipAddress, std::string &dateTime, std::string &referrer, std::string &cible,
           std::string &userAgent, int &statusCode, int &dataSize);
+
+    Infos();
+
     friend std::ostream & operator<<(std::ostream &cout, Infos &A);
 
     friend class Lecture;
 
-private:
+    std::string getCible() {
+        return _cible;
+    }
+
+protected:
+    std::string _cible;
     std::string _ipAddress;
     std::string _dateTime;
     std::string _referrer;
-    std::string _httpRequest;
     std::string _userAgent;
     int _statusCode;
     int _dataSize;
+
+
 };
 #endif //LOG_ANALYSER_INFOS_H

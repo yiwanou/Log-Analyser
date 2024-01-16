@@ -77,6 +77,13 @@ build CMakeFiles/log_analyser.dir/Statistic.cpp.o: CXX_COMPILER__log_analyser_un
   OBJECT_DIR = CMakeFiles/log_analyser.dir
   OBJECT_FILE_DIR = CMakeFiles/log_analyser.dir
 
+build CMakeFiles/log_analyser.dir/InfosStorage.cpp.o: CXX_COMPILER__log_analyser_unscanned_Debug /Users/qinshudai/Desktop/INSA/IF/3A/dev$ logiciel/log$ analyser/InfosStorage.cpp || cmake_object_order_depends_target_log_analyser
+  DEP_FILE = CMakeFiles/log_analyser.dir/InfosStorage.cpp.o.d
+  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=14.1 -fcolor-diagnostics
+  INCLUDES = -I"/Users/qinshudai/Desktop/INSA/IF/3A/dev logiciel/log analyser/."
+  OBJECT_DIR = CMakeFiles/log_analyser.dir
+  OBJECT_FILE_DIR = CMakeFiles/log_analyser.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target log_analyser
@@ -85,7 +92,7 @@ build CMakeFiles/log_analyser.dir/Statistic.cpp.o: CXX_COMPILER__log_analyser_un
 #############################################
 # Link the executable log_analyser
 
-build log_analyser: CXX_EXECUTABLE_LINKER__log_analyser_Debug CMakeFiles/log_analyser.dir/Lecture.cpp.o CMakeFiles/log_analyser.dir/main.cpp.o CMakeFiles/log_analyser.dir/Infos.cpp.o CMakeFiles/log_analyser.dir/Statistic.cpp.o
+build log_analyser: CXX_EXECUTABLE_LINKER__log_analyser_Debug CMakeFiles/log_analyser.dir/Lecture.cpp.o CMakeFiles/log_analyser.dir/main.cpp.o CMakeFiles/log_analyser.dir/Infos.cpp.o CMakeFiles/log_analyser.dir/Statistic.cpp.o CMakeFiles/log_analyser.dir/InfosStorage.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=14.1
   OBJECT_DIR = CMakeFiles/log_analyser.dir
   POST_BUILD = :

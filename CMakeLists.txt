@@ -12,4 +12,6 @@ add_executable(log_analyser
         Infos.cpp
         Infos.h
         Statistic.cpp
-        Statistic.h)
+        Statistic.h
+        InfosStorage.cpp
+        InfosStorage.h)

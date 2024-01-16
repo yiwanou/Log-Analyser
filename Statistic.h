@@ -6,15 +6,22 @@
 #define LOG_ANALYSER_STATISTIC_H
 
 
-#include "Infos.h"
+#include "InfosStorage.h"
+#include <iostream>
 #include <map>
+#include <vector>
+#include <string>
+#include <algorithm>
 
 
-class Statistic: public Infos {
+class Statistic : public Infos {
 public:
-    void option1();
+    void countCible(const InfosStorage& Infos);
+
+    void sortCible();
+
 private:
-    std::map<std::string,std::map<std::string,int>>;
+    std::map<std::string, int> cibleHits;
 
 };
 

@@ -3,7 +3,6 @@
 //
 
 #include "Lecture.h"
-#include "Infos.h"
 
 using namespace std;
 
@@ -25,7 +24,8 @@ void Lecture::readFile() {
 
 void Lecture::stockerInfos(const string &line) {
     istringstream iss(line);
-    string ipAddress, dateTime, referrer, httpRequest, userAgent;
+    string ipAddress, dateTime, referrer, httpRequest,userAgent;
+    string method,cible, protocol;
     int statusCode, dataSize;
 
     getline(iss, ipAddress, ' ');
@@ -41,6 +41,9 @@ void Lecture::stockerInfos(const string &line) {
     getline(iss, httpRequest, '"');*/
 
     iss >> __quoted(httpRequest);
+
+    istringstream http(httpRequest);
+    http >> method >> cible >> protocol;
 
     iss >> statusCode >> dataSize;
 
@@ -60,15 +63,17 @@ void Lecture::stockerInfos(const string &line) {
     if (position != string::npos) {
         referrer.erase(0, strlen(config));
     }
+
     //print les infos
     /*
     cout << ipAddress << endl;
     cout << dateTime << endl;
     cout << referrer << endl;
-    cout << httpRequest << endl;
+    cout << cible << endl;
     cout << userAgent << endl;
     cout << "-----------------------------------" << endl;*/
 
-    Infos log(ipAddress, dateTime, referrer, httpRequest, userAgent, statusCode, dataSize);
-    cout<<log;
+    Infos entry(ipAddress, dateTime, referrer, cible, userAgent, statusCode, dataSize);
+    cout<<entry;
+    infos.addInfo(entry);
 }
