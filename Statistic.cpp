@@ -70,7 +70,7 @@ void Statistic::genererDotFile(const InfosStorage &infos, std::string dotFileNam
 
     fout << "}" << std::endl;
 
-    std::cout << "Dot-file" << dotFileName << "generated !" << std::endl;
+    std::cout << "Dot-file " << dotFileName << " generated !" << std::endl;
 }
 
 void Statistic::timeFilter(const InfosStorage &Infos, int timeFilter)
@@ -125,6 +125,6 @@ void Statistic::sortCibleWithExclusion()
     for (const auto &pair : sortedCibleHits)
     {
 
-        std::cout << "_cible: " << pair.first << ", Occurrences: " << pair.second << std::endl;
+        std::cout << pair.first << "( " << pair.second <<" hits)"<< std::endl;
     }
 }

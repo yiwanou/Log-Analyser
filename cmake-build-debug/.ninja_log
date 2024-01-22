@@ -3,3 +3,9 @@
 2	703	1705352670430250410	CMakeFiles/log_analyser.dir/main.cpp.o	c6c0142a1c49539d
 694	792	1705353937770462842	log_analyser	8f060a1808b3ca0d
 2	693	1705353937667588271	CMakeFiles/log_analyser.dir/Lecture.cpp.o	769851c8f24f77a1
+2	4812	1706867953689346513	CMakeFiles/log_analyser.dir/Infos.cpp.o	16bcddba008958bc
+2	4816	1706867953688034228	CMakeFiles/log_analyser.dir/InfosStorage.cpp.o	e34bd87b9cdabb17
+1	4948	1706867953812058571	CMakeFiles/log_analyser.dir/Lecture.cpp.o	769851c8f24f77a1
+2	4986	1706867953860300640	CMakeFiles/log_analyser.dir/main.cpp.o	c6c0142a1c49539d
+2	5176	1706867954054052452	CMakeFiles/log_analyser.dir/Statistic.cpp.o	309de05a6e8fd85a
+5176	14747	1706867963625663851	log_analyser	b05202d5c3eefa5f
