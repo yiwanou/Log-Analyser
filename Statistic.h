@@ -29,11 +29,12 @@ public:
     // option -e
     void excludeResources(const InfosStorage &Infos);
     void sortCibleWithExclusion();
-        // option -t
-        void timeFilter(const InfosStorage &Infos, int timeFilter);
+    // option -t
+    void timeFilter(const InfosStorage &Infos, int timeFilter);
     void sortCibleWithTime();
 
-        private : std::map<std::string, int> cibleHits;
+private:
+    std::map<std::string, int> cibleHits;
     // //cible referrer and occurences
 };
 

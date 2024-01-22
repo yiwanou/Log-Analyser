@@ -77,7 +77,7 @@ void Statistic::timeFilter(const InfosStorage &Infos, int timeFilter)
 {
     for (class Infos entry : Infos.getAllInfos())
     {
-        if (entry.getTime() > timeFilter)
+        if (entry.getTime() >= timeFilter)
         {
             cibleHits[entry.getCible()]++;
         }
@@ -94,12 +94,10 @@ void Statistic::sortCibleWithTime()
                   return a.second > b.second;
               });
 
-    int count = 0;
     for (const auto &pair : sortedCibleHits)
     {
 
         std::cout << "_cible: " << pair.first << ", Occurrences: " << pair.second << std::endl;
-        count++;
     }
 }
 
@@ -124,11 +122,9 @@ void Statistic::sortCibleWithExclusion()
                   return a.second > b.second;
               });
 
-    int count = 0;
     for (const auto &pair : sortedCibleHits)
     {
 
         std::cout << "_cible: " << pair.first << ", Occurrences: " << pair.second << std::endl;
-        count++;
     }
 }
