@@ -26,7 +26,8 @@ public:
 
     void stockerInfos(const std::string &line);
 
-    InfosStorage returnInfos(){
+    InfosStorage returnInfosStorage()
+    {
         return infos;
     }
 };

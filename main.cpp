@@ -5,18 +5,68 @@
 #include <iostream>
 #include "Statistic.h"
 
-
 using namespace std;
 
-///Users/qinshudai/Desktop/INSA/IF/3A/dev logiciel/log analyser/Fichiers Fournis-20240115/exemple-mini-non-exhaustif.txt
-int main() {
-    string fname = "exemple-mini-non-exhaustif.txt";
+/// Users/qinshudai/Desktop/INSA/IF/3A/dev logiciel/log analyser/Fichiers Fournis-20240115/exemple-mini-non-exhaustif.txt
+int main(int argc, char *argv[])
+{
+
+    string fname;
+    string dotFileName;
+    bool excludeResources = false;
+    int timeFilter = -1;
+
+    for (int i = 1; i < argc; ++i)
+    {
+        string arg = argv[i];
+        if (arg == "-g" && i + 1 < argc)
+        {
+            dotFileName = argv[++i]; // get name of dot file
+        }
+        else if (arg == "-e")
+        {
+            excludeResources = true; // exclude resources
+        }
+        else if (arg == "-t" && i + 1 < argc)
+        {
+            timeFilter = std::stoi(argv[++i]); // get time filter
+        }
+        else
+        {
+            fname = arg; // get log file name
+        }
+    }
+
+    // Check if log file name is specified
+    if (fname.empty())
+    {
+        std::cerr << "No log file specified." << std::endl;
+        return 1;
+    }
+
     Lecture log(fname);
     log.readFile();
-    auto LogInfos = log.returnInfos();
-
+    auto AllLogInfos = log.returnInfosStorage();
     Statistic stats;
-    stats.countCible(LogInfos);
+
+    if (!dotFileName.empty())
+    {
+        stats.genererDotFile(AllLogInfos, dotFileName);
+    }
+
+    if (excludeResources)
+    {
+        // 排除资源文件（image, css, javascript）
+    }
+
+    if (timeFilter != -1)
+    {
+        // 应用时间过滤
+    }
+
+    // 默认行为：显示最常访问的 10 个文档
+
+    stats.countCible(AllLogInfos);
     stats.sortCible();
     return 0;
 }

@@ -29,3 +29,37 @@ void Statistic::sortCible() {
         }
     }
 }
+
+void Statistic::addNode(const std::string &cible, std::map<std::string, int> &cibleToNode, std::ofstream &fout, int &nodeCounter)
+{
+    if (cibleToNode.find(cible) == cibleToNode.end())
+    {
+        cibleToNode[cible] = nodeCounter++;
+        fout << "node" << cibleToNode[cible] << " [label=\"" << cible << "\"];" << std::endl;
+    }
+}
+
+
+void Statistic::genererDotFile(const InfosStorage &infos, std::string dotFileName)
+{
+    std::ofstream fout(dotFileName);
+    fout << "digraph {" << std::endl;
+
+    std::map<std::string, int> cibleToNode;
+    std::map<std::pair<int, int>, int> edges;
+    int nodeCounter = 0;
+
+    for (const Infos &entry : infos.getAllInfos())
+    {
+        addNode(entry.getReferrer(), cibleToNode, fout, nodeCounter);
+        addNode(entry.getCible(), cibleToNode, fout, nodeCounter);
+        edges[std::make_pair(cibleToNode[entry.getReferrer()], cibleToNode[entry.getCible()])]++;
+    }
+
+    for (const auto &edge : edges)
+    {
+        fout << "node" << edge.first.first << " -> node" << edge.first.second << " [label=\"" << edge.second << "\"];" << std::endl;
+    }
+
+    fout << "}" << std::endl;
+}

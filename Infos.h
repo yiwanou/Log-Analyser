@@ -8,19 +8,26 @@
 #include <iostream>
 #include <string>
 
-class Infos {
+class Infos
+{
 public:
     Infos(std::string &ipAddress, std::string &dateTime, std::string &referrer, std::string &cible,
           std::string &userAgent, int &statusCode, int &dataSize);
 
     Infos();
 
-    friend std::ostream & operator<<(std::ostream &cout, Infos &A);
+    friend std::ostream &operator<<(std::ostream &cout, Infos &A);
 
     friend class Lecture;
 
-    std::string getCible() {
+    std::string getCible() const
+    {
         return _cible;
+    }
+
+    std::string getReferrer() const
+    {
+        return _referrer;
     }
 
 protected:
@@ -31,7 +38,5 @@ protected:
     std::string _userAgent;
     int _statusCode;
     int _dataSize;
-
-
 };
-#endif //LOG_ANALYSER_INFOS_H
+#endif // LOG_ANALYSER_INFOS_H
