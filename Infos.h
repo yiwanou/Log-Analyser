@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
 
 class Infos
 {
@@ -17,6 +18,8 @@ public:
     Infos();
 
     friend std::ostream &operator<<(std::ostream &cout, Infos &A);
+
+    // friend bool operator<(const Infos &A, const Infos &B);
 
     friend class Lecture;
 
@@ -29,6 +32,8 @@ public:
     {
         return _referrer;
     }
+
+    int getTime() const;
 
 protected:
     std::string _cible;

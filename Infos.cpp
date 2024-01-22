@@ -20,6 +20,21 @@ std::ostream & operator<<(std::ostream &cout, Infos &A){
     return cout;
 }
 
-Infos::Infos() {}
+int Infos::getTime() const {
+    std::istringstream iss(_dateTime);
+    std::string date, time;
 
+    std::getline(iss, date, ':');
+    std::getline(iss, time, ' '); 
 
+    std::string hour = time.substr(0, 2);
+    int hourInt = stoi(hour);
+
+    // std::cout << hourInt << std::endl;
+
+    return hourInt;
+}
+
+    Infos::Infos()
+    {
+}

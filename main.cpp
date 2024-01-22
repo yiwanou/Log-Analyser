@@ -56,17 +56,20 @@ int main(int argc, char *argv[])
 
     if (excludeResources)
     {
-        // 排除资源文件（image, css, javascript）
+        stats.excludeResources(AllLogInfos);
+        stats.sortCibleWithExclusion();
     }
 
     if (timeFilter != -1)
     {
-        // 应用时间过滤
+        stats.timeFilter(AllLogInfos, timeFilter);
+        stats.sortCibleWithTime();
+    }
+    else if (dotFileName.empty() && !excludeResources)
+    {
+        stats.countCible(AllLogInfos);
+        stats.sortCible();
     }
 
-    // 默认行为：显示最常访问的 10 个文档
-
-    stats.countCible(AllLogInfos);
-    stats.sortCible();
     return 0;
 }
