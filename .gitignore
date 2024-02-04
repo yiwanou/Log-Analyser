@@ -1,0 +1,6 @@
+vscode/
+.idea/
+Fichiers Fournis-20240115/
+CMakeLists.txt
+cmake-build-debug/
+*.DS_Store

@@ -1,12 +1,6 @@
 # 默认忽略的文件
 /shelf/
 /workspace.xml
-/vscode/
-../.idea/
-../Fichiers Fournis-20240115/
-../CMakeLists.txt
-../cmake-build-debug/
-../*.DS_Store
 # 基于编辑器的 HTTP 客户端请求
 /httpRequests/
 # Datasource local storage ignored files
