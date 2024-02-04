@@ -82,6 +82,7 @@ void Statistic::timeFilter(const InfosStorage &Infos, int timeFilter)
             cibleHits[entry.getCible()]++;
         }
     }
+    std::cout << "Warning : only hits between "<<timeFilter<<"h and "<<timeFilter+1<<"h have been taken into account!" << std::endl;
 }
 
 void Statistic::sortCibleWithTime()
