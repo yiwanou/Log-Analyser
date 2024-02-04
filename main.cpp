@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
     string dotFileName;
     bool excludeResources = false;
     int timeFilter = -1;
+    string dateFilter;
 
     for (int i = 1; i < argc; ++i)
     {
@@ -46,8 +47,17 @@ int main(int argc, char *argv[])
                 std::cerr << "Time filter must be less than 24 hours." << std::endl;
                 return 1;
             }
-            
         }
+        if (arg == "-d")
+        {
+            if ( i + 1 > argc)
+            {
+                std::cerr << "No date specified." << std::endl;
+                return 1;
+            }
+            dateFilter = argv[++i]; // get date filter
+        }
+
         else
         {
             fname = arg; // get log file name
@@ -60,7 +70,12 @@ int main(int argc, char *argv[])
         std::cerr << "No log file specified." << std::endl;
         return 1;
     }
-
+    cout
+        << "fname: " << fname << endl
+        << "dotFileName: " << dotFileName << endl
+        << "excludeResources: " << excludeResources << endl
+        << "timeFilter: " << timeFilter << endl
+        << "dateFilter: " << dateFilter << endl;
     Lecture log(fname);
     log.readFile();
     auto AllLogInfos = log.returnInfosStorage();
@@ -78,7 +93,13 @@ int main(int argc, char *argv[])
         stats.timeFilter(AllLogInfos, timeFilter);
         stats.sortCibleWithExclusion();
     }
-    else if (dotFileName.empty() && !excludeResources)
+    else if (!dateFilter.empty())
+    {
+        stats.dateFilter(AllLogInfos, dateFilter);
+        stats.sortCibleWithExclusion();
+    }
+
+    else if (dotFileName.empty() && !excludeResources )
     {
         stats.countAllCible(AllLogInfos);
         stats.sortCible();

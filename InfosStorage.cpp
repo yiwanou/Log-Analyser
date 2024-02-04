@@ -12,3 +12,7 @@ void InfosStorage::addInfo(const Infos& Info) {
 const std::vector<Infos>& InfosStorage::getAllInfos() const {
     return allInfos;
 }
+
+InfosStorage::InfosStorage()
+{
+}

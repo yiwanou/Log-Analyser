@@ -34,6 +34,7 @@ public:
     }
 
     int getTime() const;
+    std::string getDate() const;
 
 protected:
     std::string _cible;

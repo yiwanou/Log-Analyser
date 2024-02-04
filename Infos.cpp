@@ -30,9 +30,25 @@ int Infos::getTime() const {
     std::string hour = time.substr(0, 2);
     int hourInt = stoi(hour);
 
+
     // std::cout << hourInt << std::endl;
 
     return hourInt;
+}
+std::string Infos::getDate() const
+{
+    std::istringstream iss(_dateTime);
+    std::string date, time;
+
+    std::getline(iss, date, ':');
+    std::getline(iss, time, ' ');
+
+    std::string hour = time.substr(0, 2);
+    int hourInt = stoi(hour);
+
+    // std::cout << hourInt << std::endl;
+
+    return date;
 }
 
     Infos::Infos()

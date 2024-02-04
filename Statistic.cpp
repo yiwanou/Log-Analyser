@@ -103,6 +103,18 @@ void Statistic::timeFilter(const InfosStorage &AllInfos, int timeFilter)
     std::cout << "Warning : only hits between " << timeFilter << "h and " << timeFilter + 1 << "h have been taken into account!" << std::endl;
 }
 
+void Statistic::dateFilter(const InfosStorage &AllInfos, std::string dateFilter)
+{
+    for (class Infos entry : AllInfos.getAllInfos())
+    {
+        if (entry.getDate() == dateFilter)
+        {
+            infofiltered.addInfo(entry);
+        }
+    }
+    std::cout << "Warning : only hits on " << dateFilter << " have been taken into account!" << std::endl;
+}
+
 void Statistic::excludeResources(const InfosStorage &AllInfos)
 {
     for (class Infos entry : AllInfos.getAllInfos())
@@ -117,6 +129,7 @@ void Statistic::excludeResources(const InfosStorage &AllInfos)
         }
     }
 }
+
 
 void Statistic::sortCibleWithExclusion()
 {

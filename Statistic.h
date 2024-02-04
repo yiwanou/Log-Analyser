@@ -30,6 +30,8 @@ public:
     void sortCibleWithExclusion();
     // option -t
     void timeFilter(const InfosStorage &AllInfos, int timeFilter);
+    // option -y
+    void dateFilter(const InfosStorage &AllInfos, std::string dateFilter);
 
 private:
     std::map<std::string, int> cibleHits;

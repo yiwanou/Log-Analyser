@@ -12,6 +12,8 @@ class InfosStorage {
     public:
         void addInfo(const Infos& Infos);
         const std::vector<Infos>& getAllInfos() const;
+        InfosStorage();
+        InfosStorage(const InfosStorage &A): allInfos(A.allInfos) {}
 
     private:
         std::vector<Infos> allInfos;
