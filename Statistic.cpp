@@ -77,7 +77,7 @@ void Statistic::timeFilter(const InfosStorage &Infos, int timeFilter)
 {
     for (class Infos entry : Infos.getAllInfos())
     {
-        if (entry.getTime() >= timeFilter)
+        if (entry.getTime() == timeFilter)
         {
             cibleHits[entry.getCible()]++;
         }
