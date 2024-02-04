@@ -21,4 +21,4 @@ InfosStorage.o: InfosStorage.cpp InfosStorage.h
 .PHONY: clean
 
 clean:
-	rm analog $(objects)
+	rm analog $(objects) *.dot *.png

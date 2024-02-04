@@ -56,16 +56,8 @@ void Lecture::stockerInfos(const string &line) {
         referrer.erase(0, strlen(config));
     }
 
-    //print les infos
-    /*
-    cout << ipAddress << endl;
-    cout << dateTime << endl;
-    cout << referrer << endl;
-    cout << cible << endl;
-    cout << userAgent << endl;
-    cout << "-----------------------------------" << endl;*/
+
 
     Infos entry(ipAddress, dateTime, referrer, cible, userAgent, statusCode, dataSize);
-    cout<<entry;
     infos.addInfo(entry);
 }

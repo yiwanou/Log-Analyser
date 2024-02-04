@@ -17,25 +17,25 @@ class Statistic : public InfosStorage
 {
 public:
     // sans option
-    void countCible(const InfosStorage &Infos);
-
+    void countAllCible(const InfosStorage &AllInfos);
     void sortCible();
     // option -g fichier.dot
     void addNode(const std::string &cible, std::map<std::string, int> &cibleToNode, std::ofstream &fout, int &nodeCounter);
 
-    void countCibleReferrer(const InfosStorage &Infos);
+    void countCibleReferrer(const InfosStorage &AllInfos);
 
-    void genererDotFile(const InfosStorage &Infos, std::string dotFileName);
+    void genererDotFile(const InfosStorage &AllInfos, std::string dotFileName);
     // option -e
-    void excludeResources(const InfosStorage &Infos);
+    void excludeResources(const InfosStorage &AllInfos);
     void sortCibleWithExclusion();
     // option -t
-    void timeFilter(const InfosStorage &Infos, int timeFilter);
-    void sortCibleWithTime();
+    void timeFilter(const InfosStorage &AllInfos, int timeFilter);
 
 private:
     std::map<std::string, int> cibleHits;
-    // //cible referrer and occurences
+    //cible referrer and occurences
+    std::map<std::pair<std::string, std::string>, int> cibleReferrerHits;
+    InfosStorage infofiltered;
 };
 
 #endif // LOG_ANALYSER_STATISTIC_H

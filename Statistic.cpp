@@ -4,9 +4,10 @@
 
 #include "Statistic.h"
 
-void Statistic::countCible(const InfosStorage &Infos)
+void Statistic::countAllCible(const InfosStorage &AllInfos)
 {
-    for (class Infos entry : Infos.getAllInfos())
+    infofiltered = AllInfos;
+    for (class Infos entry : infofiltered.getAllInfos())
     {
         cibleHits[entry.getCible()]++;
     }
@@ -28,13 +29,14 @@ void Statistic::sortCible()
     {
         if (count < 10)
         {
-            std::cout << "_cible: " << pair.first << ", Occurrences: " << pair.second << std::endl;
-            count++;
+
+            std::cout << pair.first << "( " << pair.second << " hits)" << std::endl;
         }
         else
         {
             break; // Stop after printing the top 10
         }
+        count++;
     }
 }
 
@@ -47,25 +49,41 @@ void Statistic::addNode(const std::string &cible, std::map<std::string, int> &ci
     }
 }
 
-void Statistic::genererDotFile(const InfosStorage &infos, std::string dotFileName)
+void Statistic::countCibleReferrer(const InfosStorage &AllInfos)
 {
+    for (class Infos entry : infofiltered.getAllInfos())
+    {
+        cibleReferrerHits[std::make_pair(entry.getCible(), entry.getReferrer())]++;
+    }
+}
+
+void Statistic::genererDotFile(const InfosStorage &AllInfos, std::string dotFileName)
+{
+    countCibleReferrer(AllInfos);
+
     std::ofstream fout(dotFileName);
+
+    if (!fout.is_open())
+    {
+        throw "Dot file open failed !";
+    }
+
     fout << "digraph {" << std::endl;
 
     std::map<std::string, int> cibleToNode;
     std::map<std::pair<int, int>, int> edges;
     int nodeCounter = 0;
 
-    for (const Infos &entry : infos.getAllInfos())
+    for (const auto &pair : cibleReferrerHits)
     {
-        addNode(entry.getReferrer(), cibleToNode, fout, nodeCounter);
-        addNode(entry.getCible(), cibleToNode, fout, nodeCounter);
-        edges[std::make_pair(cibleToNode[entry.getReferrer()], cibleToNode[entry.getCible()])]++;
+        addNode(pair.first.first, cibleToNode, fout, nodeCounter);
+        addNode(pair.first.second, cibleToNode, fout, nodeCounter);
+        edges[std::make_pair(cibleToNode[pair.first.first], cibleToNode[pair.first.second])] = pair.second;
     }
 
     for (const auto &edge : edges)
     {
-        fout << "node" << edge.first.first << " -> node" << edge.first.second << " [label=\"" << edge.second << "\"];" << std::endl;
+        fout << "node" << edge.first.second << " -> node" << edge.first.first << " [label=\"" << edge.second << "\"];" << std::endl;
     }
 
     fout << "}" << std::endl;
@@ -73,59 +91,35 @@ void Statistic::genererDotFile(const InfosStorage &infos, std::string dotFileNam
     std::cout << "Dot-file " << dotFileName << " generated !" << std::endl;
 }
 
-void Statistic::timeFilter(const InfosStorage &Infos, int timeFilter)
+void Statistic::timeFilter(const InfosStorage &AllInfos, int timeFilter)
 {
-    for (class Infos entry : Infos.getAllInfos())
+    for (class Infos entry : AllInfos.getAllInfos())
     {
         if (entry.getTime() == timeFilter)
         {
-            cibleHits[entry.getCible()]++;
+            infofiltered.addInfo(entry);
         }
     }
-    std::cout << "Warning : only hits between "<<timeFilter<<"h and "<<timeFilter+1<<"h have been taken into account!" << std::endl;
+    std::cout << "Warning : only hits between " << timeFilter << "h and " << timeFilter + 1 << "h have been taken into account!" << std::endl;
 }
 
-void Statistic::sortCibleWithTime()
+void Statistic::excludeResources(const InfosStorage &AllInfos)
 {
-    std::vector<std::pair<std::string, int>> sortedCibleHits(cibleHits.begin(), cibleHits.end());
-
-    std::sort(sortedCibleHits.begin(), sortedCibleHits.end(),
-              [](const auto &a, const auto &b)
-              {
-                  return a.second > b.second;
-              });
-
-    for (const auto &pair : sortedCibleHits)
+    for (class Infos entry : AllInfos.getAllInfos())
     {
-
-        std::cout << "_cible: " << pair.first << ", Occurrences: " << pair.second << std::endl;
-    }
-}
-
-void Statistic::excludeResources(const InfosStorage &Infos)
-{
-    for (class Infos entry : Infos.getAllInfos())
-    {
-        if (entry.getCible().find(".jpg") == std::string::npos && entry.getCible().find(".png") == std::string::npos && entry.getCible().find(".gif") == std::string::npos && entry.getCible().find(".css") == std::string::npos && entry.getCible().find(".js") == std::string::npos)
+        if (entry.getCible().find(".jpg") == std::string::npos &&
+              entry.getCible().find(".png") == std::string::npos &&
+              entry.getCible().find(".gif") == std::string::npos &&
+              entry.getCible().find(".css") == std::string::npos &&
+              entry.getCible().find(".js") == std::string::npos)
         {
-            cibleHits[entry.getCible()]++;
+            infofiltered.addInfo(entry);
         }
     }
 }
 
 void Statistic::sortCibleWithExclusion()
 {
-    std::vector<std::pair<std::string, int>> sortedCibleHits(cibleHits.begin(), cibleHits.end());
-
-    std::sort(sortedCibleHits.begin(), sortedCibleHits.end(),
-              [](const auto &a, const auto &b)
-              {
-                  return a.second > b.second;
-              });
-
-    for (const auto &pair : sortedCibleHits)
-    {
-
-        std::cout << pair.first << "( " << pair.second <<" hits)"<< std::endl;
-    }
+    countAllCible(infofiltered);
+    sortCible();
 }

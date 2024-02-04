@@ -19,17 +19,34 @@ int main(int argc, char *argv[])
     for (int i = 1; i < argc; ++i)
     {
         string arg = argv[i];
-        if (arg == "-g" && i + 1 < argc)
+        if (arg == "-g" )
         {
+            if(i + 1 > argc)
+            {
+                std::cerr << "No dot file specified." << std::endl;
+                return 1;
+            }
             dotFileName = argv[++i]; // get name of dot file
         }
-        else if (arg == "-e")
+        if (arg == "-e")
         {
             excludeResources = true; // exclude resources
         }
-        else if (arg == "-t" && i + 1 < argc)
+        if (arg == "-t" )
         {
-            timeFilter = std::stoi(argv[++i]); // get time filter
+            if ( i + 1 > argc)
+            {
+                std::cerr << "No time filter specified." << std::endl;
+                return 1;
+            }
+            
+            timeFilter = std::stoi(argv[++i]);// get time filter
+            if (timeFilter >= 24)
+            {
+                std::cerr << "Time filter must be less than 24 hours." << std::endl;
+                return 1;
+            }
+            
         }
         else
         {
@@ -49,10 +66,6 @@ int main(int argc, char *argv[])
     auto AllLogInfos = log.returnInfosStorage();
     Statistic stats;
 
-    if (!dotFileName.empty())
-    {
-        stats.genererDotFile(AllLogInfos, dotFileName);
-    }
 
     if (excludeResources)
     {
@@ -63,12 +76,17 @@ int main(int argc, char *argv[])
     if (timeFilter != -1)
     {
         stats.timeFilter(AllLogInfos, timeFilter);
-        stats.sortCibleWithTime();
+        stats.sortCibleWithExclusion();
     }
     else if (dotFileName.empty() && !excludeResources)
     {
-        stats.countCible(AllLogInfos);
+        stats.countAllCible(AllLogInfos);
         stats.sortCible();
+    }
+
+    if (!dotFileName.empty())
+    {
+        stats.genererDotFile(AllLogInfos, dotFileName);
     }
 
     return 0;

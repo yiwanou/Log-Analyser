@@ -15,8 +15,6 @@ class InfosStorage {
 
     private:
         std::vector<Infos> allInfos;
-
-
 };
 
 
