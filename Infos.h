@@ -13,7 +13,7 @@ class Infos
 {
 public:
     Infos(std::string &ipAddress, std::string &dateTime, std::string &referrer, std::string &cible,
-          std::string &userAgent, int &statusCode, int &dataSize);
+          std::string &userAgent, std::string &statusCode, std::string &dataSize);
 
     Infos();
 
@@ -41,7 +41,7 @@ protected:
     std::string _dateTime;
     std::string _referrer;
     std::string _userAgent;
-    int _statusCode;
-    int _dataSize;
+    std::string _statusCode;
+    std::string _dataSize;
 };
 #endif // LOG_ANALYSER_INFOS_H

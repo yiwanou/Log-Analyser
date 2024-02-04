@@ -5,7 +5,7 @@
 #include "Infos.h"
 
 Infos::Infos(std::string &ipAddress, std::string &dateTime, std::string &referrer, std::string &cible,
-             std::string &userAgent, int &statusCode, int &dataSize) : _ipAddress(ipAddress), _dateTime(dateTime),
+             std::string &userAgent, std::string &statusCode, std::string &dataSize) : _ipAddress(ipAddress), _dateTime(dateTime),
                                                                     _referrer(referrer), _cible(cible),
                                                                     _userAgent(userAgent), _statusCode(statusCode),
                                                                     _dataSize(dataSize) {

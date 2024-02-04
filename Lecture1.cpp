@@ -24,33 +24,41 @@ void Lecture::readFile() {
 
 void Lecture::stockerInfos(const string &line) {
     istringstream iss(line);
-    string ipAddress, dateTime, referrer, httpRequest,userAgent,method,cible,protocol,stringStatusCode,stringdataSize,statusCode, dataSize;
+    string ipAddress, dateTime, referrer, httpRequest,userAgent;
+    string method,cible, protocol;
+    int statusCode, dataSize;
 
     getline(iss, ipAddress, ' ');
-    iss.ignore(5);
+    iss.ignore(256, ' ');
+    iss.ignore(256, ' ');
 
     getline(iss, dateTime, ']');
+    dateTime.erase(0, 1);
 
-    iss.ignore(2);
+    /*iss.ignore();
 
     getline(iss, httpRequest, '"');
-    iss.ignore();
+    getline(iss, httpRequest, '"');*/
 
-    getline(iss, stringStatusCode, ' ');
-
-    getline(iss, stringdataSize, ' ');
-    iss.ignore();
-
-    getline(iss, referrer, '"');
-    iss.ignore(2);
-
-    getline(iss, userAgent, '"');
+    iss >> __quoted(httpRequest);
 
     istringstream http(httpRequest);
     http >> method >> cible >> protocol;
 
+    iss >> statusCode >> dataSize;
 
-    // Supprimer la configuration du referrer
+    /*iss.ignore();
+
+    getline(iss, referrer, '"');
+    getline(iss, referrer, '"');*/
+
+    iss >> __quoted(referrer);
+    iss >> __quoted(userAgent);
+
+    /*getline(iss, userAgent, '"');
+    getline(iss, userAgent, '"');*/
+
+    // erase the config
     size_t position = referrer.find(config);
     if (position != string::npos) {
         referrer.erase(0, strlen(config));
